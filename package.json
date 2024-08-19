@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.19",
+    "@headlessui/react": "^2.1.2",
     "axios": "^1.7.2",
     "cheerio": "^1.0.0-rc.12",
     "mongodb": "^6.8.0",

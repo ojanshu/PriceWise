@@ -7,6 +7,7 @@ import { getProductById, getSimilarProducts } from '@/lib/actions'
 import { formatNumber } from '@/lib/utils'
 import PriceInfoCard from '@/components/PriceInfoCard'
 import ProductCard from '@/components/ProductCard'
+import Modal from '@/components/Modal'
 
 type Props = {
     params: {id: string}
