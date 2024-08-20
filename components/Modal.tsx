@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { FormEvent, Fragment } from "react";
 import { useState } from "react";
 import {
   Description,
@@ -14,6 +14,12 @@ import Image from "next/image";
 
 const Modal = () => {
   let [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    
+  }
 
   const openModal = () => setIsOpen(true);
 
@@ -26,13 +32,14 @@ const Modal = () => {
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
+        Copy
         <Dialog
           as="div"
           open={isOpen}
           onClose={closeModal}
-          className="dialog-container"
+          className="dialog-container fixed inset-0 z-10 overflow-y-auto"
         >
-          <div className="min-h-screen px-4 text-center">
+          <div className="flex min-h-screen items-center justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -45,9 +52,7 @@ const Modal = () => {
               <div className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
             </Transition.Child>
 
-            <span className="inline-block h-screen" aria-hidden="true" />
-
-            <Transition.Child 
+            <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
@@ -56,7 +61,9 @@ const Modal = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="dialog-content">
+              <div className="dialog-content w-full max-w-md transform 
+              overflow-hidden rounded-2xl bg-white p-6 text-left 
+              align-middle shadow-xl transition-all">
                 <div className="flex flex-col">
                   <div className="flex justify-between">
                     <div className="p-3 border border-gray-200 rounded-10">
@@ -68,7 +75,7 @@ const Modal = () => {
                       />
                     </div>
 
-                    <Image 
+                    <Image
                       src="/assets/icons/x-close.svg"
                       alt="close"
                       width={20}
@@ -77,6 +84,45 @@ const Modal = () => {
                       onClick={closeModal}
                     />
                   </div>
+
+                  <h4 className="dialog-head_text">
+                    Stay updated with product pricing alerts right in the inbox!
+                  </h4>
+
+                  <p className="text-sm text-gray-600 mt-2">
+                    Never miss a bargain alert with timely alerts!
+                  </p>
+
+                  <form className="flex flex-col mt-5" onSubmit={handleSubmit}>
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      Email Address
+                    </label>
+                    <div className="dialog-input_container">
+                      <Image
+                        src="/assets/icons/mail.svg" 
+                        alt="mail"
+                        width={18}
+                        height={18}
+                      />
+                      <input 
+                        required
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email address"
+                        className="dialog-input"
+                      />
+                    </div>
+
+                    <button type="submit" className="dialog-btn">
+                      Track
+                    </button>
+
+                  </form>
                 </div>
               </div>
             </Transition.Child>
