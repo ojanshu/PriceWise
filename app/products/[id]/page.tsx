@@ -156,7 +156,7 @@ try{
                         />
                     </div>
                 </div>
-                <Modal />
+                <Modal productID={id}/>
             </div>
         </div>
 

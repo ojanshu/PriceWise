@@ -8,7 +8,7 @@ import Product from "../models/product.model";
 import { getAveragePrice, getLowestPrice } from "../utils";
 import { getHighestPrice } from "../utils";
 import { User } from "@/types";
-import { generateEmailBody } from "../nodemailer";
+import { generateEmailBody, sendEmail } from "../nodemailer";
 
 export async function scrapeAndStoreProduct(productUrl: string){
     if (!productUrl) return;
@@ -79,7 +79,7 @@ export async function getAllProducts() {
     }
 }
 
-export async function getSimilarProducts(productID : String) {
+export async function getSimilarProducts(productID : string) {
     try {
         connectToDB();
 
@@ -97,7 +97,7 @@ export async function getSimilarProducts(productID : String) {
     }
 }
 
-export async function addUserEmailToProduct(productID : String, userEmail : String){
+export async function addUserEmailToProduct(productID : string, userEmail : string){
     try {
         const product = await Product.findById(productID);
 
@@ -110,7 +110,9 @@ export async function addUserEmailToProduct(productID : String, userEmail : Stri
 
             await product.save();
 
-            const emailContent = generateEmailBody(product, "WELCOME");
+            const emailContent = await generateEmailBody(product, "WELCOME");
+
+            await sendEmail(emailContent, [userEmail]);
         }
 
     } catch (error) {

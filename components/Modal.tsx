@@ -10,15 +10,27 @@ import {
   Transition,
 } from "@headlessui/react";
 import Image from "next/image";
+import { addUserEmailToProduct } from "@/lib/actions";
 // import { DialogOverlay } from '@headlessui/react';
 
-const Modal = () => {
+interface Props{
+  productID: string
+}
+
+const Modal = ({ productID } : Props ) => {
   let [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, setEmail] = useState('');
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    await addUserEmailToProduct(productID, email);
+
+    setIsSubmitting(false);
+    setEmail('');
+    closeModal();
   }
 
   const openModal = () => setIsOpen(true);
