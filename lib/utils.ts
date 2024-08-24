@@ -13,7 +13,7 @@
 //     return currencyText ? currencyText : '';
 // }
 
-// import { PriceHistoryItem, Product } from "@/types";
+import { PriceHistoryItem, Product } from "@/types";
 
 const Notification = {
   WELCOME: 'WELCOME',
