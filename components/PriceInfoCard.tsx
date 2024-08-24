@@ -2,9 +2,9 @@ import React from 'react'
 import Image from 'next/image';
 
 interface Props{
-  title: String;
-  iconSrc: String;
-  value: String;
+  title: string;
+  iconSrc: string;
+  value: string;
 }
 
 const PriceInfoCard = ( {title, iconSrc, value} : Props ) => {
