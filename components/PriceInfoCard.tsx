@@ -1,9 +1,10 @@
 import React from 'react'
 import Image from 'next/image';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 interface Props{
   title: string;
-  iconSrc: string;
+  iconSrc: string | StaticImport;
   value: string;
 }
 
@@ -14,7 +15,7 @@ const PriceInfoCard = ( {title, iconSrc, value} : Props ) => {
 
       <div className='flex gap-1'>
         <Image
-        src={iconSrc}
+        src={iconSrc as string}
         alt={title}
         width={20}
         height={20}
